@@ -9,21 +9,19 @@ import java.util.List;
 @RequestMapping("/shipments")
 public class ShipmentController {
         private final ShipmentService shipmentService;
-            public ShipmentController(ShipmentService shipmentService) {
-                        this.shipmentService = shipmentService;
-            }
-                @PostMapping
-                    public Shipment createShipment(@RequestBody Shipment shipment) {
-                                return shipmentService.createShipment(shipment);
-
-                    }
-                        @GetMapping("/{id}")
-                            public Shipment getShipment(@PathVariable Long id) {
-                                        return shipmentService.getShipmentById(id);
-                            }
-                                @GetMapping
-                                    public List<Shipment> getAllShipments() {
-                                                return shipmentService.getAllShipments();
-
-                                    }
-                                    }
+        public ShipmentController(ShipmentService shipmentService) {
+                this.shipmentService = shipmentService;
+        }
+        @PostMapping
+        public Shipment createShipment(@RequestBody Shipment shipment) {
+                return shipmentService.createShipment(shipment);
+        }
+        @GetMapping("/{id}")
+        public Shipment getShipment(@PathVariable Long id) {
+            return shipmentService.getShipmentById(id);
+        }
+         @GetMapping
+        public List<Shipment> getAllShipments() {
+            return shipmentService.getAllShipments();
+        }
+ }
