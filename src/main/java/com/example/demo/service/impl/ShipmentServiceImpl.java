@@ -15,32 +15,19 @@ public class ShipmentServiceImpl implements ShipmentService {
                 this.shipmentRepository = shipmentRepository;
         }
 
-
-
         @Override
         public Shipment createShipment(Shipment shipment) {
                 return shipmentRepository.save(shipment);
        }
 
-         @Override
+        @Override
+        public Shipment getShipmentById(Long id) {
+            return shipmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Shipment not found with id: " + id));
+        }
 
-                            public Shipment getShipmentById(Long id) {
-
-                                        return shipmentRepository.findById(id)
-
-                                                        .orElseThrow(() -> new ResourceNotFoundException("Shipment not found with id: " + id));
-
-                            }
-
-
-
-                                @Override
-
-                                    public List<Shipment> getAllShipments() {
-
-                                                return shipmentRepository.findAll();
-
-                                    }
-
+        @Override
+            public List<Shipment> getAllShipments() {
+            return shipmentRepository.findAll();
+        }
 }
                                     
