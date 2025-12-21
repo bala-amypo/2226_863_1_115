@@ -24,5 +24,4 @@ public interface ShipmentService {
 
                 List<Shipment> getAllShipments();
 
-                }
-}
+        }
