@@ -38,41 +38,33 @@ public class Shipment {
 
     }
 
-
-
     public String getOrigin() {
-
         return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+     }
+
+
+
+    public String getDestination() {
+
+        return destination;
 
     }
 
 
 
-    public void setOrigin(String origin) {
+    public void setDestination(String destination) {
 
-        this.origin = origin;
+        this.destination = destination;
 
-     }
-
-
-
-                                                                                public String getDestination() {
-
-                                                                                            return destination;
-
-                                                                                }
+    }
 
 
 
-                                                                                    public void setDestination(String destination) {
-
-                                                                                                this.destination = destination;
-
-                                                                                    }
-
-
-
-                                                                                        public String getStatus() {
+    public String getStatus() {
 
                                                                                                     return status;
 
