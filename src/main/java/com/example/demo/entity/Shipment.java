@@ -46,37 +46,20 @@ public class Shipment {
         this.origin = origin;
      }
 
-
-
     public String getDestination() {
-
         return destination;
-
     }
-
-
 
     public void setDestination(String destination) {
-
         this.destination = destination;
-
     }
 
-
-
     public String getStatus() {
+        return status;
+    }
 
-                                                                                                    return status;
-
-                                                                                        }
-
-
-
-                                                                                            public void setStatus(String status) {
-
-                                                                                                        this.status = status;
-
-                                                                                            }
-
-                                                                                            }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}
                                                                                            
