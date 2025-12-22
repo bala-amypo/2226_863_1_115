@@ -1,30 +1,17 @@
 package com.example.demo.entity;
 
-
-
 import jakarta.persistence.*;
 
-
-
 @Entity
-
 @Table(name = "shipments")
 
 public class Shipment {
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
+     private String shipmentCode;
 
-
-
-        @Id
-
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-                private Long id;
-
-
-
-                    private String shipmentCode;
-
-                        private String origin;
+     private String origin;
 
                             private String destination;
 
@@ -123,15 +110,4 @@ public class Shipment {
                                                                                             }
 
                                                                                             }
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-}
+                                                                                           
