@@ -40,19 +40,19 @@ public class Shipment {
 
 
 
-                                                                        public String getOrigin() {
+    public String getOrigin() {
 
-                                                                                    return origin;
+        return origin;
 
-                                                                        }
+    }
 
 
 
-                                                                            public void setOrigin(String origin) {
+    public void setOrigin(String origin) {
 
-                                                                                        this.origin = origin;
+        this.origin = origin;
 
-                                                                            }
+     }
 
 
 
