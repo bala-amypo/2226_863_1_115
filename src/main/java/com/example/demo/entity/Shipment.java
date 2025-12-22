@@ -6,60 +6,37 @@ import jakarta.persistence.*;
 @Table(name = "shipments")
 
 public class Shipment {
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Long id;
-     private String shipmentCode;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String shipmentCode;
+    private String origin;
+    private String destination;
+    private String status;
 
-     private String origin;
+    public Shipment() {
 
-                            private String destination;
+    }
 
-                                private String status;
+    public Shipment(String shipmentCode, String origin, String destination, String status) {
+            this.shipmentCode = shipmentCode;
+            this.origin = origin;
+            this.destination = destination;
+            this.status = status;
+    }
 
+    public Long getId() {
+        return id;
+    }
 
+    public String getShipmentCode() {
+        return shipmentCode;
+    }
 
-                                    public Shipment() {
+    public void setShipmentCode(String shipmentCode) {
+        this.shipmentCode = shipmentCode;
 
-                                    }
-
-
-
-                                        public Shipment(String shipmentCode, String origin, String destination, String status) {
-
-                                                    this.shipmentCode = shipmentCode;
-
-                                                            this.origin = origin;
-
-                                                                    this.destination = destination;
-
-                                                                            this.status = status;
-
-                                        }
-
-
-
-                                            public Long getId() {
-
-                                                        return id;
-
-                                            }
-
-
-
-                                                public String getShipmentCode() {
-
-                                                            return shipmentCode;
-
-                                                }
-
-
-
-                                                    public void setShipmentCode(String shipmentCode) {
-
-                                                                this.shipmentCode = shipmentCode;
-
-                                                                    }
+    }
 
 
 
