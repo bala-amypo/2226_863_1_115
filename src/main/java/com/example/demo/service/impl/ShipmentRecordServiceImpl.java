@@ -10,17 +10,31 @@ import java.util.List;
 @Service
 public class ShipmentRecordServiceImpl implements ShipmentRecordService {
 
-    private  ShipmentRecordRepository repo;
+    private ShipmentRecordRepository repository;
 
-    public ShipmentRecordServiceImpl(ShipmentRecordRepository repo) {
-        this.repo = repo;
+    public ShipmentRecordServiceImpl(ShipmentRecordRepository repository) {
+        this.repository = repository;
     }
 
-    public ShipmentRecord saveShipment(ShipmentRecord shipment) {
-        return repo.save(shipment);
+    public ShipmentRecord createShipment(ShipmentRecord shipment) {
+        return repository.save(shipment);
+    }
+
+    public ShipmentRecord updateShipmentStatus(Long id, String status) {
+        ShipmentRecord s = repository.findById(id).orElse(null);
+        s.setStatus(status);
+        return repository.save(s);
+    }
+
+    public ShipmentRecord getShipmentByCode(String code) {
+        return repository.findByShipmentCode(code).orElse(null);
+    }
+
+    public ShipmentRecord getShipmentById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     public List<ShipmentRecord> getAllShipments() {
-        return repo.findAll();
+        return repository.findAll();
     }
 }
