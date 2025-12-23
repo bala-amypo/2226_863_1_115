@@ -15,15 +15,12 @@ public class AlertRecord {
     private boolean acknowledged;
     private LocalDateTime sentAt;
 
-    public AlertRecord() {}
-
     @PrePersist
-    public void prePersist() {
+    public void init() {
         acknowledged = false;
         sentAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public Long getShipmentId() { return shipmentId; }
     public void setShipmentId(Long shipmentId) { this.shipmentId = shipmentId; }

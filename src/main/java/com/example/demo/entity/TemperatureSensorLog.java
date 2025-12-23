@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "temperature_sensor_logs")
+@Table(name = "temperature_logs")
 public class TemperatureSensorLog {
 
     @Id
@@ -15,9 +15,6 @@ public class TemperatureSensorLog {
     private Double temperatureValue;
     private LocalDateTime recordedAt;
 
-    public TemperatureSensorLog() {}
-
-    // Getters and Setters
     public Long getId() { return id; }
     public Long getShipmentId() { return shipmentId; }
     public void setShipmentId(Long shipmentId) { this.shipmentId = shipmentId; }

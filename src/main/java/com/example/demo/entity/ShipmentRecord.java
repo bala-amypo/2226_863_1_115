@@ -10,23 +10,16 @@ public class ShipmentRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String shipmentCode;
-
     private String origin;
     private String destination;
     private String status;
 
-    public ShipmentRecord() {}
-
     @PrePersist
-    public void prePersist() {
-        if (status == null) {
-            status = "IN_TRANSIT";
-        }
+    public void defaultStatus() {
+        if (status == null) status = "IN_TRANSIT";
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public String getShipmentCode() { return shipmentCode; }
     public void setShipmentCode(String shipmentCode) { this.shipmentCode = shipmentCode; }

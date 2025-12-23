@@ -15,14 +15,9 @@ public class BreachRecord {
     private String severity;
     private boolean resolved;
 
-    public BreachRecord() {}
-
     @PrePersist
-    public void prePersist() {
-        resolved = false;
-    }
+    public void init() { resolved = false; }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public Long getShipmentId() { return shipmentId; }
     public void setShipmentId(Long shipmentId) { this.shipmentId = shipmentId; }
