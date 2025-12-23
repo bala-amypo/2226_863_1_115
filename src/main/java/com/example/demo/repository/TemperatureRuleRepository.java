@@ -3,7 +3,6 @@ package com.example.demo.repository;
 import com.example.demo.entity.TemperatureRule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,5 +11,5 @@ public interface TemperatureRuleRepository
 
     List<TemperatureRule> findByActiveTrue();
 
-    Optional<TemperatureRule> findByProductTypeAndActiveTrue(String productType);
+    Optional<TemperatureRule> findByProductType(String productType);
 }
