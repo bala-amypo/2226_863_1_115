@@ -1,0 +1,9 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.BreachRecord;
+import java.util.List;
+
+public interface BreachDetectionService {
+    BreachRecord logBreach(BreachRecord breach);
+    List<BreachRecord> getAllBreaches();
+}
