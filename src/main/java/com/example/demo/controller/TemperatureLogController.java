@@ -1,11 +1,3 @@
-package com.example.demo.controller;
-
-import com.example.demo.entity.TemperatureSensorLog;
-import com.example.demo.service.TemperatureLogService;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 @RestController
 @RequestMapping("/logs")
 public class TemperatureLogController {
@@ -17,12 +9,12 @@ public class TemperatureLogController {
     }
 
     @PostMapping
-    public TemperatureSensorLog recordLog(@RequestBody TemperatureSensorLog log) {
-        return service.recordLog(log);
+    public TemperatureSensorLog create(@RequestBody TemperatureSensorLog log) {
+        return service.saveLog(log);
     }
 
     @GetMapping
-    public List<TemperatureSensorLog> getAllLogs() {
+    public List<TemperatureSensorLog> getAll() {
         return service.getAllLogs();
     }
 }
