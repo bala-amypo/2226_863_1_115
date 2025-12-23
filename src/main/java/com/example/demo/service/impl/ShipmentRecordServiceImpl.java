@@ -16,12 +16,10 @@ public class ShipmentRecordServiceImpl implements ShipmentRecordService {
         this.repo = repo;
     }
 
-    @Override
-    public ShipmentRecord createShipment(ShipmentRecord shipment) {
+    public ShipmentRecord saveShipment(ShipmentRecord shipment) {
         return repo.save(shipment);
     }
 
-    @Override
     public List<ShipmentRecord> getAllShipments() {
         return repo.findAll();
     }

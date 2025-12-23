@@ -16,12 +16,10 @@ public class TemperatureLogServiceImpl implements TemperatureLogService {
         this.repo = repo;
     }
 
-    @Override
-    public TemperatureSensorLog recordLog(TemperatureSensorLog log) {
+    public TemperatureSensorLog saveLog(TemperatureSensorLog log) {
         return repo.save(log);
     }
 
-    @Override
     public List<TemperatureSensorLog> getAllLogs() {
         return repo.findAll();
     }

@@ -4,6 +4,6 @@ import com.example.demo.entity.BreachRecord;
 import java.util.List;
 
 public interface BreachDetectionService {
-    BreachRecord logBreach(BreachRecord breach);
+    BreachRecord saveBreach(BreachRecord breach);
     List<BreachRecord> getAllBreaches();
 }

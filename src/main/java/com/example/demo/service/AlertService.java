@@ -4,6 +4,6 @@ import com.example.demo.entity.AlertRecord;
 import java.util.List;
 
 public interface AlertService {
-    AlertRecord triggerAlert(AlertRecord alert);
+    AlertRecord saveAlert(AlertRecord alert);
     List<AlertRecord> getAllAlerts();
 }

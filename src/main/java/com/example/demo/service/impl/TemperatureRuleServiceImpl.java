@@ -16,15 +16,13 @@ public class TemperatureRuleServiceImpl implements TemperatureRuleService {
         this.repo = repo;
     }
 
-    @Override
-    public TemperatureRule createRule(TemperatureRule rule) {
+    public TemperatureRule saveRule(TemperatureRule rule) {
         if (rule.getMinTemp() >= rule.getMaxTemp()) {
             throw new IllegalArgumentException("minTemp must be less than maxTemp");
         }
         return repo.save(rule);
     }
 
-    @Override
     public List<TemperatureRule> getAllRules() {
         return repo.findAll();
     }
