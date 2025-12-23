@@ -18,31 +18,26 @@ public class AlertController {
         this.service = service;
     }
 
-    // POST /api/alerts
     @PostMapping("/")
     public AlertRecord triggerAlert(@RequestBody AlertRecord alert) {
         return service.triggerAlert(alert);
     }
 
-    // PUT /api/alerts/{id}/acknowledge
     @PutMapping("/{id}/acknowledge")
     public AlertRecord acknowledgeAlert(@PathVariable Long id) {
         return service.acknowledgeAlert(id);
     }
 
-    // GET /api/alerts/shipment/{shipmentId}
     @GetMapping("/shipment/{shipmentId}")
     public List<AlertRecord> getAlertsByShipment(@PathVariable Long shipmentId) {
         return service.getAlertsByShipment(shipmentId);
     }
 
-    // GET /api/alerts/{id}
     @GetMapping("/{id}")
     public AlertRecord getAlertById(@PathVariable Long id) {
         return service.getAlertById(id);
     }
 
-    // GET /api/alerts
     @GetMapping("/")
     public List<AlertRecord> getAllAlerts() {
         return service.getAllAlerts();

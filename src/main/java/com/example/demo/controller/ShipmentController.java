@@ -18,32 +18,27 @@ public class ShipmentController {
         this.service = service;
     }
 
-    // POST /api/shipments
     @PostMapping("/")
     public ShipmentRecord createShipment(@RequestBody ShipmentRecord shipment) {
         return service.createShipment(shipment);
     }
 
-    // PUT /api/shipments/{id}/status
     @PutMapping("/{id}/status")
     public ShipmentRecord updateStatus(@PathVariable Long id,
                                        @RequestParam String status) {
         return service.updateShipmentStatus(id, status);
     }
 
-    // GET /api/shipments/code/{shipmentCode}
     @GetMapping("/code/{shipmentCode}")
     public ShipmentRecord getByCode(@PathVariable String shipmentCode) {
         return service.getShipmentByCode(shipmentCode);
     }
 
-    // GET /api/shipments/{id}
     @GetMapping("/{id}")
     public ShipmentRecord getById(@PathVariable Long id) {
         return service.getShipmentById(id);
     }
 
-    // GET /api/shipments
     @GetMapping("/")
     public List<ShipmentRecord> getAllShipments() {
         return service.getAllShipments();
