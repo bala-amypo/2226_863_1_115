@@ -10,11 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/breaches")
 @Tag(name = "Breach Records")
-public class BreachRecordController {
+public class BreachController {
 
     private BreachDetectionService service;
 
-    public BreachRecordController(BreachDetectionService service) {
+    public BreachController(BreachDetectionService service) {
         this.service = service;
     }
 

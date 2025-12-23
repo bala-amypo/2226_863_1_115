@@ -10,11 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/shipments")
 @Tag(name = "Shipments")
-public class ShipmentRecordController {
+public class ShipmentController {
 
     private ShipmentRecordService service;
 
-    public ShipmentRecordController(ShipmentRecordService service) {
+    public ShipmentController(ShipmentRecordService service) {
         this.service = service;
     }
 
