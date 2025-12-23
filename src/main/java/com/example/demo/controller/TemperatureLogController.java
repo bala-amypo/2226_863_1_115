@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/logs")
 public class TemperatureLogController {
 
-    private final TemperatureLogService service;
+    private  TemperatureLogService service;
 
     public TemperatureLogController(TemperatureLogService service) {
         this.service = service;

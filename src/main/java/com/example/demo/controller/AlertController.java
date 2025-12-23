@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/alerts")
 public class AlertController {
 
-    private final AlertService service;
+    private  AlertService service;
 
     public AlertController(AlertService service) {
         this.service = service;

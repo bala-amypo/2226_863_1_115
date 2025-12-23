@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/rules")
 public class TemperatureRuleController {
 
-    private final TemperatureRuleService service;
+    private  TemperatureRuleService service;
 
     public TemperatureRuleController(TemperatureRuleService service) {
         this.service = service;

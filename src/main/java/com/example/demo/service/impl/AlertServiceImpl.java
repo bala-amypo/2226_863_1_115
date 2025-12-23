@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class AlertServiceImpl implements AlertService {
 
-    private final AlertRecordRepository repo;
+    private  AlertRecordRepository repo;
 
     public AlertServiceImpl(AlertRecordRepository repo) {
         this.repo = repo;

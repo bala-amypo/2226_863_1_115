@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class BreachDetectionServiceImpl implements BreachDetectionService {
 
-    private final BreachRecordRepository repo;
+    private  BreachRecordRepository repo;
 
     public BreachDetectionServiceImpl(BreachRecordRepository repo) {
         this.repo = repo;

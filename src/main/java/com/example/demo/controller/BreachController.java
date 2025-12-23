@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/breaches")
 public class BreachController {
 
-    private final BreachDetectionService service;
+    private  BreachDetectionService service;
 
     public BreachController(BreachDetectionService service) {
         this.service = service;
