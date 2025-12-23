@@ -10,17 +10,21 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private  UserRepository repo;
+    private UserRepository repository;
 
-    public UserServiceImpl(UserRepository repo) {
-        this.repo = repo;
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
     }
 
-    public User saveUser(User user) {
-        return repo.save(user);
+    public User registerUser(User user) {
+        return repository.save(user);
+    }
+
+    public User getUserById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     public List<User> getAllUsers() {
-        return repo.findAll();
+        return repository.findAll();
     }
 }

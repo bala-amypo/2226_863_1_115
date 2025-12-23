@@ -4,6 +4,12 @@ import com.example.demo.entity.TemperatureSensorLog;
 import java.util.List;
 
 public interface TemperatureLogService {
-    TemperatureSensorLog saveLog(TemperatureSensorLog log);
+
+    TemperatureSensorLog recordLog(TemperatureSensorLog log);
+
+    TemperatureSensorLog getLogById(Long id);
+
+    List<TemperatureSensorLog> getLogsByShipment(Long shipmentId);
+
     List<TemperatureSensorLog> getAllLogs();
 }

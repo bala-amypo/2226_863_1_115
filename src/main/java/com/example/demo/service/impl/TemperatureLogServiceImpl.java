@@ -10,17 +10,25 @@ import java.util.List;
 @Service
 public class TemperatureLogServiceImpl implements TemperatureLogService {
 
-    private  TemperatureSensorLogRepository repo;
+    private TemperatureSensorLogRepository repository;
 
-    public TemperatureLogServiceImpl(TemperatureSensorLogRepository repo) {
-        this.repo = repo;
+    public TemperatureLogServiceImpl(TemperatureSensorLogRepository repository) {
+        this.repository = repository;
     }
 
-    public TemperatureSensorLog saveLog(TemperatureSensorLog log) {
-        return repo.save(log);
+    public TemperatureSensorLog recordLog(TemperatureSensorLog log) {
+        return repository.save(log);
+    }
+
+    public TemperatureSensorLog getLogById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public List<TemperatureSensorLog> getLogsByShipment(Long shipmentId) {
+        return repository.findByShipmentId(shipmentId);
     }
 
     public List<TemperatureSensorLog> getAllLogs() {
-        return repo.findAll();
+        return repository.findAll();
     }
 }

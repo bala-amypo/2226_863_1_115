@@ -10,20 +10,30 @@ import java.util.List;
 @Service
 public class TemperatureRuleServiceImpl implements TemperatureRuleService {
 
-    private  TemperatureRuleRepository repo;
+    private TemperatureRuleRepository repository;
 
-    public TemperatureRuleServiceImpl(TemperatureRuleRepository repo) {
-        this.repo = repo;
+    public TemperatureRuleServiceImpl(TemperatureRuleRepository repository) {
+        this.repository = repository;
     }
 
-    public TemperatureRule saveRule(TemperatureRule rule) {
-        if (rule.getMinTemp() >= rule.getMaxTemp()) {
-            throw new IllegalArgumentException("minTemp must be less than maxTemp");
-        }
-        return repo.save(rule);
+    public TemperatureRule createRule(TemperatureRule rule) {
+        return repository.save(rule);
+    }
+
+    public TemperatureRule updateRule(Long id, TemperatureRule rule) {
+        rule.setId(id);
+        return repository.save(rule);
+    }
+
+    public List<TemperatureRule> getActiveRules() {
+        return repository.findByActiveTrue();
+    }
+
+    public TemperatureRule getRuleByProductType(String productType) {
+        return repository.findByProductType(productType).orElse(null);
     }
 
     public List<TemperatureRule> getAllRules() {
-        return repo.findAll();
+        return repository.findAll();
     }
 }
