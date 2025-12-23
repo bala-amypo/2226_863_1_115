@@ -16,12 +16,10 @@ public class BreachDetectionServiceImpl implements BreachDetectionService {
         this.repo = repo;
     }
 
-    @Override
-    public BreachRecord logBreach(BreachRecord breach) {
+    public BreachRecord saveBreach(BreachRecord breach) {
         return repo.save(breach);
     }
 
-    @Override
     public List<BreachRecord> getAllBreaches() {
         return repo.findAll();
     }

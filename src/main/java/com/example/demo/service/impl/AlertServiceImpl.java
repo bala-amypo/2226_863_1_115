@@ -16,12 +16,10 @@ public class AlertServiceImpl implements AlertService {
         this.repo = repo;
     }
 
-    @Override
-    public AlertRecord triggerAlert(AlertRecord alert) {
+    public AlertRecord saveAlert(AlertRecord alert) {
         return repo.save(alert);
     }
 
-    @Override
     public List<AlertRecord> getAllAlerts() {
         return repo.findAll();
     }
