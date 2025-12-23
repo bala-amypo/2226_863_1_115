@@ -2,26 +2,49 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.TemperatureRule;
 import com.example.demo.service.TemperatureRuleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/rules")
+@RequestMapping("/api/rules")
+@Tag(name = "Temperature Rules")
 public class TemperatureRuleController {
 
-    private  TemperatureRuleService service;
+    private TemperatureRuleService service;
 
     public TemperatureRuleController(TemperatureRuleService service) {
         this.service = service;
     }
 
-    @PostMapping
+    // POST /api/rules
+    @PostMapping("/")
     public TemperatureRule createRule(@RequestBody TemperatureRule rule) {
-        return service.saveRule(rule);
+        return service.createRule(rule);
     }
 
-    @GetMapping
+    // PUT /api/rules/{id}
+    @PutMapping("/{id}")
+    public TemperatureRule updateRule(@PathVariable Long id,
+                                      @RequestBody TemperatureRule rule) {
+        return service.updateRule(id, rule);
+    }
+
+    // GET /api/rules/active
+    @GetMapping("/active")
+    public List<TemperatureRule> getActiveRules() {
+        return service.getActiveRules();
+    }
+
+    // GET /api/rules/product/{productType}
+    @GetMapping("/product/{productType}")
+    public TemperatureRule getRuleByProduct(@PathVariable String productType) {
+        return service.getRuleByProductType(productType);
+    }
+
+    // GET /api/rules
+    @GetMapping("/")
     public List<TemperatureRule> getAllRules() {
         return service.getAllRules();
     }
