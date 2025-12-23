@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ShipmentRecordServiceImpl implements ShipmentRecordService {
 
-    private final ShipmentRecordRepository repo;
+    private  ShipmentRecordRepository repo;
 
     public ShipmentRecordServiceImpl(ShipmentRecordRepository repo) {
         this.repo = repo;

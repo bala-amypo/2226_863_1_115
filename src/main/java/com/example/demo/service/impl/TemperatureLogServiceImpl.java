@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class TemperatureLogServiceImpl implements TemperatureLogService {
 
-    private final TemperatureSensorLogRepository repo;
+    private  TemperatureSensorLogRepository repo;
 
     public TemperatureLogServiceImpl(TemperatureSensorLogRepository repo) {
         this.repo = repo;

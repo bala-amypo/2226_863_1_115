@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class TemperatureRuleServiceImpl implements TemperatureRuleService {
 
-    private final TemperatureRuleRepository repo;
+    private  TemperatureRuleRepository repo;
 
     public TemperatureRuleServiceImpl(TemperatureRuleRepository repo) {
         this.repo = repo;
