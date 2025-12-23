@@ -17,8 +17,8 @@ public class AlertController {
     }
 
     @PostMapping
-    public AlertRecord triggerAlert(@RequestBody AlertRecord alert) {
-        return service.triggerAlert(alert);
+    public AlertRecord createAlert(@RequestBody AlertRecord alert) {
+        return service.saveAlert(alert);
     }
 
     @GetMapping

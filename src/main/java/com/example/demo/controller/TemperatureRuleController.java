@@ -1,3 +1,11 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.TemperatureRule;
+import com.example.demo.service.TemperatureRuleService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/rules")
 public class TemperatureRuleController {
@@ -9,12 +17,12 @@ public class TemperatureRuleController {
     }
 
     @PostMapping
-    public TemperatureRule create(@RequestBody TemperatureRule rule) {
+    public TemperatureRule createRule(@RequestBody TemperatureRule rule) {
         return service.saveRule(rule);
     }
 
     @GetMapping
-    public List<TemperatureRule> getAll() {
+    public List<TemperatureRule> getAllRules() {
         return service.getAllRules();
     }
 }

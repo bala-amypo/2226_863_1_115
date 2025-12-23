@@ -1,3 +1,11 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.BreachRecord;
+import com.example.demo.service.BreachDetectionService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/breaches")
 public class BreachController {
@@ -9,12 +17,12 @@ public class BreachController {
     }
 
     @PostMapping
-    public BreachRecord create(@RequestBody BreachRecord breach) {
+    public BreachRecord createBreach(@RequestBody BreachRecord breach) {
         return service.saveBreach(breach);
     }
 
     @GetMapping
-    public List<BreachRecord> getAll() {
+    public List<BreachRecord> getAllBreaches() {
         return service.getAllBreaches();
     }
 }
