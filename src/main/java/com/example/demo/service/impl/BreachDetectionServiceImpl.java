@@ -1,33 +1,28 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.Shipment;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.ShipmentRepository;
-import com.example.demo.service.ShipmentService;
+import com.example.demo.entity.BreachRecord;
+import com.example.demo.repository.BreachRecordRepository;
+import com.example.demo.service.BreachDetectionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ShipmentServiceImpl implements ShipmentService {
-        private final ShipmentRepository shipmentRepository;
-        public ShipmentServiceImpl(ShipmentRepository shipmentRepository) {
-                this.shipmentRepository = shipmentRepository;
-        }
+public class BreachDetectionServiceImpl implements BreachDetectionService {
 
-        @Override
-        public Shipment createShipment(Shipment shipment) {
-                return shipmentRepository.save(shipment);
-       }
+    private final BreachRecordRepository repo;
 
-        @Override
-        public Shipment getShipmentById(Long id) {
-            return shipmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Shipment not found with id: " + id));
-        }
+    public BreachDetectionServiceImpl(BreachRecordRepository repo) {
+        this.repo = repo;
+    }
 
-        @Override
-            public List<Shipment> getAllShipments() {
-            return shipmentRepository.findAll();
-        }
+    @Override
+    public BreachRecord logBreach(BreachRecord breach) {
+        return repo.save(breach);
+    }
+
+    @Override
+    public List<BreachRecord> getAllBreaches() {
+        return repo.findAll();
+    }
 }
-                                    
