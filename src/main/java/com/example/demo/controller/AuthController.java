@@ -1,35 +1,34 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.User;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.RegisterRequest;
+import com.example.demo.dto.ApiResponse;
 import com.example.demo.service.UserService;
+import com.example.demo.security.JwtUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/users")
-@Tag(name = "Users")
-public class UserController {
+@RequestMapping("/auth")
+@Tag(name = "Authentication")
+public class AuthController {
 
     private UserService service;
 
-    public UserController(UserService service) {
+    public AuthController(UserService service) {
         this.service = service;
     }
 
-    @PostMapping("/")
-    public User registerUser(@RequestBody User user) {
-        return service.registerUser(user);
+    @PostMapping("/register")
+    public ApiResponse register(@RequestBody RegisterRequest request) {
+        service.register(request);
+        return new ApiResponse(true, "User registered successfully");
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return service.getUserById(id);
-    }
-
-    @GetMapping("/")
-    public List<User> getAllUsers() {
-        return service.getAllUsers();
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody LoginRequest request) {
+        String token = JwtUtil.generateToken(request.getEmail());
+        return new AuthResponse(token, "Login successful");
     }
 }

@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.TemperatureSensorLog;
+import com.example.demo.dto.ApiResponse;
+import com.example.demo.dto.TemperatureLogRequestDTO;
+import com.example.demo.dto.TemperatureLogResponseDTO;
 import com.example.demo.service.TemperatureLogService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -18,27 +20,20 @@ public class TemperatureLogController {
         this.service = service;
     }
 
-    // POST /api/logs
-    @PostMapping("/")
-    public TemperatureSensorLog recordLog(@RequestBody TemperatureSensorLog log) {
-        return service.recordLog(log);
+    @PostMapping
+    public ApiResponse recordLog(@RequestBody TemperatureLogRequestDTO dto) {
+        service.recordLog(dto);
+        return new ApiResponse(true, "Temperature log recorded");
     }
 
-    // GET /api/logs/shipment/{shipmentId}
-    @GetMapping("/shipment/{shipmentId}")
-    public List<TemperatureSensorLog> getLogsByShipment(@PathVariable Long shipmentId) {
-        return service.getLogsByShipment(shipmentId);
-    }
-
-    // GET /api/logs/{id}
     @GetMapping("/{id}")
-    public TemperatureSensorLog getLogById(@PathVariable Long id) {
+    public TemperatureLogResponseDTO getLog(@PathVariable Long id) {
         return service.getLogById(id);
     }
 
-    // GET /api/logs
-    @GetMapping("/")
-    public List<TemperatureSensorLog> getAllLogs() {
-        return service.getAllLogs();
+    @GetMapping("/shipment/{shipmentId}")
+    public List<TemperatureLogResponseDTO> getLogsByShipment(
+            @PathVariable Long shipmentId) {
+        return service.getLogsByShipment(shipmentId);
     }
 }
