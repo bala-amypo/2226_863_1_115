@@ -15,3 +15,14 @@ public interface AlertService {
 
     List<AlertRecord> getAllAlerts();
 }
+package com.example.demo.service;
+
+import com.example.demo.entity.AlertRecord;
+import java.util.List;
+
+public interface AlertService {
+
+    AlertRecord createAlert(AlertRecord alert);
+
+    List<AlertRecord> getAlertsByShipment(Long shipmentId);
+}
