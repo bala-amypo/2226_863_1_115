@@ -6,10 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface TemperatureRuleRepository
-        extends JpaRepository<TemperatureRule, Long> {
-
+public interface TemperatureRuleRepository extends JpaRepository<TemperatureRule, Long> {
     List<TemperatureRule> findByActiveTrue();
-
     Optional<TemperatureRule> findByProductType(String productType);
 }
