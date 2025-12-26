@@ -1,11 +1,15 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.TemperatureSensorLog;
+import com.example.demo.dto.TemperatureLogRequestDTO;
+import com.example.demo.dto.TemperatureLogResponseDTO;
+
 import java.util.List;
 
 public interface TemperatureLogService {
 
-    TemperatureSensorLog recordTemperature(TemperatureSensorLog log);
+    void recordLog(TemperatureLogRequestDTO dto);
 
-    List<TemperatureSensorLog> getLogsByShipment(Long shipmentId);
+    TemperatureLogResponseDTO getLogById(Long id);
+
+    List<TemperatureLogResponseDTO> getLogsByShipment(Long shipmentId);
 }
