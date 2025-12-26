@@ -1,16 +1,15 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.ShipmentRecord;
+import com.example.demo.dto.ShipmentRequestDTO;
+import com.example.demo.dto.ShipmentResponseDTO;
+
 import java.util.List;
-import java.util.Optional;
 
 public interface ShipmentRecordService {
 
-    ShipmentRecord createShipment(ShipmentRecord shipment);
+    ShipmentResponseDTO createShipment(ShipmentRequestDTO dto);
 
-    ShipmentRecord updateShipmentStatus(Long id, String status);
+    ShipmentResponseDTO getShipmentById(Long id);
 
-    Optional<ShipmentRecord> getShipmentByCode(String code);
-
-    List<ShipmentRecord> getAllShipments();
+    List<ShipmentResponseDTO> getAllShipments();
 }
