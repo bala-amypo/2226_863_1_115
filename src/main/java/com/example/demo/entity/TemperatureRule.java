@@ -1,9 +1,16 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "temperature_rules")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TemperatureRule {
 
     @Id
@@ -15,14 +22,6 @@ public class TemperatureRule {
     private Double maxTemp;
     private boolean active;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getProductType() { return productType; }
-    public void setProductType(String productType) { this.productType = productType; }
-    public Double getMinTemp() { return minTemp; }
-    public void setMinTemp(Double minTemp) { this.minTemp = minTemp; }
-    public Double getMaxTemp() { return maxTemp; }
-    public void setMaxTemp(Double maxTemp) { this.maxTemp = maxTemp; }
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    private LocalDate effectiveFrom;
+    private LocalDate effectiveTo;
 }

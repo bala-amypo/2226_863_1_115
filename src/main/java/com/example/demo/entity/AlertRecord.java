@@ -1,10 +1,16 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "alert_records")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AlertRecord {
 
     @Id
@@ -12,6 +18,7 @@ public class AlertRecord {
     private Long id;
 
     private Long shipmentId;
+    private Long breachId;
     private boolean acknowledged;
     private LocalDateTime sentAt;
 
@@ -20,11 +27,4 @@ public class AlertRecord {
         acknowledged = false;
         sentAt = LocalDateTime.now();
     }
-
-    public Long getId() { return id; }
-    public Long getShipmentId() { return shipmentId; }
-    public void setShipmentId(Long shipmentId) { this.shipmentId = shipmentId; }
-    public boolean isAcknowledged() { return acknowledged; }
-    public void setAcknowledged(boolean acknowledged) { this.acknowledged = acknowledged; }
-    public LocalDateTime getSentAt() { return sentAt; }
 }

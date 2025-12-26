@@ -1,9 +1,14 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "breach_records")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BreachRecord {
 
     @Id
@@ -11,20 +16,13 @@ public class BreachRecord {
     private Long id;
 
     private Long shipmentId;
+    private Long logId;
     private Double breachValue;
     private String severity;
     private boolean resolved;
 
     @PrePersist
-    public void init() { resolved = false; }
-
-    public Long getId() { return id; }
-    public Long getShipmentId() { return shipmentId; }
-    public void setShipmentId(Long shipmentId) { this.shipmentId = shipmentId; }
-    public Double getBreachValue() { return breachValue; }
-    public void setBreachValue(Double breachValue) { this.breachValue = breachValue; }
-    public String getSeverity() { return severity; }
-    public void setSeverity(String severity) { this.severity = severity; }
-    public boolean isResolved() { return resolved; }
-    public void setResolved(boolean resolved) { this.resolved = resolved; }
+    public void prePersist() {
+        resolved = false;
+    }
 }
