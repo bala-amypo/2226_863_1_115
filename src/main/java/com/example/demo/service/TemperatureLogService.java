@@ -5,11 +5,7 @@ import java.util.List;
 
 public interface TemperatureLogService {
 
-    TemperatureSensorLog recordLog(TemperatureSensorLog log);
-
-    TemperatureSensorLog getLogById(Long id);
+    TemperatureSensorLog recordTemperature(TemperatureSensorLog log);
 
     List<TemperatureSensorLog> getLogsByShipment(Long shipmentId);
-
-    List<TemperatureSensorLog> getAllLogs();
 }

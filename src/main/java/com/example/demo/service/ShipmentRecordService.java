@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entity.ShipmentRecord;
 import java.util.List;
+import java.util.Optional;
 
 public interface ShipmentRecordService {
 
@@ -9,10 +10,7 @@ public interface ShipmentRecordService {
 
     ShipmentRecord updateShipmentStatus(Long id, String status);
 
-    ShipmentRecord getShipmentByCode(String shipmentCode);
-
-    ShipmentRecord getShipmentById(Long id);
+    Optional<ShipmentRecord> getShipmentByCode(String code);
 
     List<ShipmentRecord> getAllShipments();
 }
-
