@@ -1,11 +1,14 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.AlertRecordResponseDTO;
 import com.example.demo.entity.AlertRecord;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.AlertRecordRepository;
 import com.example.demo.service.AlertService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AlertServiceImpl implements AlertService {
@@ -16,25 +19,50 @@ public class AlertServiceImpl implements AlertService {
         this.repository = repository;
     }
 
-    public AlertRecord triggerAlert(AlertRecord alert) {
-        return repository.save(alert);
+    @Override
+    public void triggerAlert(AlertRecordResponseDTO dto) {
+        AlertRecord alert = new AlertRecord();
+        alert.setMessage(dto.getMessage());
+        alert.setAcknowledged(false);
+        repository.save(alert);
     }
 
-    public AlertRecord acknowledgeAlert(Long id) {
-        AlertRecord alert = repository.findById(id).orElse(null);
+    @Override
+    public void acknowledgeAlert(Long id) {
+        AlertRecord alert = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Alert not found"));
+
         alert.setAcknowledged(true);
-        return repository.save(alert);
+        repository.save(alert);
     }
 
-    public AlertRecord getAlertById(Long id) {
-        return repository.findById(id).orElse(null);
+    @Override
+    public AlertRecordResponseDTO getAlertById(Long id) {
+        AlertRecord alert = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Alert not found"));
+
+        AlertRecordResponseDTO dto = new AlertRecordResponseDTO();
+        dto.setId(alert.getId());
+        dto.setMessage(alert.getMessage());
+        dto.setAcknowledged(alert.isAcknowledged());
+        dto.setCreatedAt(alert.getCreatedAt());
+        return dto;
     }
 
-    public List<AlertRecord> getAlertsByShipment(Long shipmentId) {
-        return repository.findByShipmentId(shipmentId);
-    }
-
-    public List<AlertRecord> getAllAlerts() {
-        return repository.findAll();
+    @Override
+    public List<AlertRecordResponseDTO> getAllAlerts() {
+        return repository.findAll()
+                .stream()
+                .map(alert -> {
+                    AlertRecordResponseDTO dto = new AlertRecordResponseDTO();
+                    dto.setId(alert.getId());
+                    dto.setMessage(alert.getMessage());
+                    dto.setAcknowledged(alert.isAcknowledged());
+                    dto.setCreatedAt(alert.getCreatedAt());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 }

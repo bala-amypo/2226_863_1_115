@@ -1,11 +1,14 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.BreachRecordResponseDTO;
 import com.example.demo.entity.BreachRecord;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.BreachRecordRepository;
 import com.example.demo.service.BreachDetectionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BreachDetectionServiceImpl implements BreachDetectionService {
@@ -16,25 +19,50 @@ public class BreachDetectionServiceImpl implements BreachDetectionService {
         this.repository = repository;
     }
 
-    public BreachRecord logBreach(BreachRecord breach) {
-        return repository.save(breach);
+    @Override
+    public void logBreach(BreachRecordResponseDTO dto) {
+        BreachRecord breach = new BreachRecord();
+        breach.setRecordedTemperature(dto.getRecordedTemperature());
+        breach.setResolved(false);
+        repository.save(breach);
     }
 
-    public BreachRecord resolveBreach(Long id) {
-        BreachRecord breach = repository.findById(id).orElse(null);
+    @Override
+    public void resolveBreach(Long id) {
+        BreachRecord breach = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Breach not found"));
+
         breach.setResolved(true);
-        return repository.save(breach);
+        repository.save(breach);
     }
 
-    public BreachRecord getBreachById(Long id) {
-        return repository.findById(id).orElse(null);
+    @Override
+    public BreachRecordResponseDTO getBreachById(Long id) {
+        BreachRecord breach = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Breach not found"));
+
+        BreachRecordResponseDTO dto = new BreachRecordResponseDTO();
+        dto.setId(breach.getId());
+        dto.setRecordedTemperature(breach.getRecordedTemperature());
+        dto.setDetectedAt(breach.getDetectedAt());
+        dto.setResolved(breach.isResolved());
+        return dto;
     }
 
-    public List<BreachRecord> getBreachesByShipment(Long shipmentId) {
-        return repository.findByShipmentId(shipmentId);
-    }
-
-    public List<BreachRecord> getAllBreaches() {
-        return repository.findAll();
+    @Override
+    public List<BreachRecordResponseDTO> getAllBreaches() {
+        return repository.findAll()
+                .stream()
+                .map(breach -> {
+                    BreachRecordResponseDTO dto = new BreachRecordResponseDTO();
+                    dto.setId(breach.getId());
+                    dto.setRecordedTemperature(breach.getRecordedTemperature());
+                    dto.setDetectedAt(breach.getDetectedAt());
+                    dto.setResolved(breach.isResolved());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 }
