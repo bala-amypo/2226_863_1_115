@@ -4,40 +4,33 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "alert_records")
+@Table(name = "alerts")
 public class AlertRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long shipmentId;
-    private Long breachId;
+    private String message;
     private boolean acknowledged;
-    private LocalDateTime sentAt;
+    private LocalDateTime createdAt;
 
-    public AlertRecord() {}
-
-    public AlertRecord(Long shipmentId, Long breachId) {
-        this.shipmentId = shipmentId;
-        this.breachId = breachId;
-    }
-
-    @PrePersist
-    public void init() {
-        this.acknowledged = false;
-        this.sentAt = LocalDateTime.now();
-    }
+    @ManyToOne
+    @JoinColumn(name = "shipment_id")
+    private ShipmentRecord shipment;
 
     public Long getId() { return id; }
-    public Long getShipmentId() { return shipmentId; }
-    public void setShipmentId(Long shipmentId) { this.shipmentId = shipmentId; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getBreachId() { return breachId; }
-    public void setBreachId(Long breachId) { this.breachId = breachId; }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 
     public boolean isAcknowledged() { return acknowledged; }
     public void setAcknowledged(boolean acknowledged) { this.acknowledged = acknowledged; }
 
-    public LocalDateTime getSentAt() { return sentAt; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public ShipmentRecord getShipment() { return shipment; }
+    public void setShipment(ShipmentRecord shipment) { this.shipment = shipment; }
 }

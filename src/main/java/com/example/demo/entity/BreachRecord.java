@@ -1,48 +1,36 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "breach_records")
+@Table(name = "breaches")
 public class BreachRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long shipmentId;
-    private Long logId;
-    private Double breachValue;
-    private String severity;
+    private Double recordedTemperature;
+    private LocalDateTime detectedAt;
     private boolean resolved;
 
-    public BreachRecord() {}
-
-    public BreachRecord(Long shipmentId, Long logId, Double breachValue, String severity) {
-        this.shipmentId = shipmentId;
-        this.logId = logId;
-        this.breachValue = breachValue;
-        this.severity = severity;
-    }
-
-    @PrePersist
-    public void setDefaults() {
-        this.resolved = false;
-    }
+    @ManyToOne
+    @JoinColumn(name = "shipment_id")
+    private ShipmentRecord shipment;
 
     public Long getId() { return id; }
-    public Long getShipmentId() { return shipmentId; }
-    public void setShipmentId(Long shipmentId) { this.shipmentId = shipmentId; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getLogId() { return logId; }
-    public void setLogId(Long logId) { this.logId = logId; }
+    public Double getRecordedTemperature() { return recordedTemperature; }
+    public void setRecordedTemperature(Double recordedTemperature) { this.recordedTemperature = recordedTemperature; }
 
-    public Double getBreachValue() { return breachValue; }
-    public void setBreachValue(Double breachValue) { this.breachValue = breachValue; }
-
-    public String getSeverity() { return severity; }
-    public void setSeverity(String severity) { this.severity = severity; }
+    public LocalDateTime getDetectedAt() { return detectedAt; }
+    public void setDetectedAt(LocalDateTime detectedAt) { this.detectedAt = detectedAt; }
 
     public boolean isResolved() { return resolved; }
     public void setResolved(boolean resolved) { this.resolved = resolved; }
+
+    public ShipmentRecord getShipment() { return shipment; }
+    public void setShipment(ShipmentRecord shipment) { this.shipment = shipment; }
 }

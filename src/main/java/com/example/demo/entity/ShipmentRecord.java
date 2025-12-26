@@ -3,32 +3,19 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "shipment_records")
+@Table(name = "shipments")
 public class ShipmentRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String shipmentCode;
+
     private String origin;
     private String destination;
     private String status;
-
-    public ShipmentRecord() {}
-
-    public ShipmentRecord(Long id, String shipmentCode, String origin, String destination, String status) {
-        this.id = id;
-        this.shipmentCode = shipmentCode;
-        this.origin = origin;
-        this.destination = destination;
-        this.status = status;
-    }
-
-    @PrePersist
-    public void setDefaultStatus() {
-        if (status == null) status = "IN_TRANSIT";
-    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
