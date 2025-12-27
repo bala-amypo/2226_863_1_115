@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ApiResponse;
-import com.example.demo.dto.TemperatureRuleRequestDTO;
-import com.example.demo.dto.TemperatureRuleResponseDTO;
+import com.example.demo.dto.TemperatureRuleRequest;
+import com.example.demo.dto.TemperatureRuleResponse;
 import com.example.demo.service.TemperatureRuleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,26 +14,33 @@ import java.util.List;
 @Tag(name = "Temperature Rules")
 public class TemperatureRuleController {
 
-    private TemperatureRuleService service;
+    private final TemperatureRuleService service;
 
     public TemperatureRuleController(TemperatureRuleService service) {
         this.service = service;
     }
 
     @PostMapping
-    public ApiResponse createRule(@RequestBody TemperatureRuleRequestDTO dto) {
-        service.createRule(dto);
-        return new ApiResponse(true, "Rule created successfully");
+    public ResponseEntity<TemperatureRuleResponse> createRule(
+            @RequestBody TemperatureRuleRequest request) {
+        return ResponseEntity.ok(service.createRule(request));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TemperatureRuleResponse> updateRule(
+            @PathVariable Long id,
+            @RequestBody TemperatureRuleRequest request) {
+        return ResponseEntity.ok(service.updateRule(id, request));
     }
 
     @GetMapping("/active")
-    public List<TemperatureRuleResponseDTO> getActiveRules() {
-        return service.getActiveRules();
+    public ResponseEntity<List<TemperatureRuleResponse>> getActiveRules() {
+        return ResponseEntity.ok(service.getActiveRules());
     }
 
     @GetMapping("/product/{productType}")
-    public TemperatureRuleResponseDTO getRuleByProduct(
+    public ResponseEntity<TemperatureRuleResponse> getByProductType(
             @PathVariable String productType) {
-        return service.getRuleByProductType(productType);
+        return ResponseEntity.ok(service.getRuleByProductType(productType));
     }
 }
