@@ -1,38 +1,44 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ApiResponse;
-import com.example.demo.dto.ShipmentRequestDTO;
-import com.example.demo.dto.ShipmentResponseDTO;
+import com.example.demo.dto.ShipmentRequest;
+import com.example.demo.dto.ShipmentResponse;
 import com.example.demo.service.ShipmentRecordService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/shipments")
 @Tag(name = "Shipments")
-public class ShipmentController {
+public class ShipmentRecordController {
 
-    private ShipmentRecordService service;
+    private final ShipmentRecordService service;
 
-    public ShipmentController(ShipmentRecordService service) {
+    public ShipmentRecordController(ShipmentRecordService service) {
         this.service = service;
     }
 
     @PostMapping
-    public ApiResponse createShipment(@RequestBody ShipmentRequestDTO dto) {
-        service.createShipment(dto);
-        return new ApiResponse(true, "Shipment created successfully");
+    public ResponseEntity<ShipmentResponse> createShipment(
+            @RequestBody ShipmentRequest request) {
+        return ResponseEntity.ok(service.createShipment(request));
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<ShipmentResponse> updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status) {
+        return ResponseEntity.ok(service.updateShipmentStatus(id, status));
     }
 
     @GetMapping("/{id}")
-    public ShipmentResponseDTO getShipment(@PathVariable Long id) {
-        return service.getShipmentById(id);
+    public ResponseEntity<ShipmentResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getShipmentById(id));
     }
 
-    @GetMapping
-    public List<ShipmentResponseDTO> getAllShipments() {
-        return service.getAllShipments();
+    @GetMapping("/code/{shipmentCode}")
+    public ResponseEntity<ShipmentResponse> getByCode(
+            @PathVariable String shipmentCode) {
+        return ResponseEntity.ok(service.getShipmentByCode(shipmentCode));
     }
 }
