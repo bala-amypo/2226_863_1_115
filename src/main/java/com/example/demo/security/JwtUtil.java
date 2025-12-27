@@ -17,8 +17,7 @@ public class JwtUtil {
     private final long expirationMillis;
 
     public JwtUtil(String secretKey, long expirationMillis) {
-        this.secretKey = "b7f4c9e2a8d1f6c0e3b9a4d8f1c7e5a2d6c9b0e4f8a1d3c7e2b9f6a5
-";
+        this.secretKey = secretKey;
         this.expirationMillis = expirationMillis;
     }
 
