@@ -1,15 +1,15 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.TemperatureRuleRequestDTO;
-import com.example.demo.dto.TemperatureRuleResponseDTO;
+import com.example.demo.entity.TemperatureRule;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface TemperatureRuleService {
+    TemperatureRule createRule(TemperatureRule rule);
 
-    void createRule(TemperatureRuleRequestDTO dto);
+    Optional<TemperatureRule> getRuleForProduct(String productType, LocalDate date);
 
-    List<TemperatureRuleResponseDTO> getActiveRules();
-
-    TemperatureRuleResponseDTO getRuleByProductType(String productType);
+    List<TemperatureRule> getActiveRules();
 }

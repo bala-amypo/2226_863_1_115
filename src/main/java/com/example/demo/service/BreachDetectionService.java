@@ -1,16 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.BreachRecordResponseDTO;
+import com.example.demo.entity.BreachRecord;
 
 import java.util.List;
 
 public interface BreachDetectionService {
+    BreachRecord logBreach(BreachRecord breach);
 
-    void logBreach(BreachRecordResponseDTO dto);
+    BreachRecord resolveBreach(Long id);
 
-    void resolveBreach(Long id);
-
-    BreachRecordResponseDTO getBreachById(Long id);
-
-    List<BreachRecordResponseDTO> getAllBreaches();
+    List<BreachRecord> getBreachesByShipment(Long shipmentId);
 }
