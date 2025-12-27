@@ -1,45 +1,29 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AlertRequest;
-import com.example.demo.dto.AlertResponse;
+import com.example.demo.entity.AlertRecord;
 import com.example.demo.service.AlertService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/alerts")
-@Tag(name = "Alerts")
+@RequestMapping("/alerts")
 public class AlertRecordController {
+    private final AlertService alertService;
 
-    private final AlertService service;
-
-    public AlertRecordController(AlertService service) {
-        this.service = service;
+    public AlertRecordController(AlertService alertService) {
+        this.alertService = alertService;
     }
 
     @PostMapping
-    public ResponseEntity<AlertResponse> triggerAlert(
-            @RequestBody AlertRequest request) {
-        return ResponseEntity.ok(service.triggerAlert(request));
-    }
-
-    @PutMapping("/{id}/acknowledge")
-    public ResponseEntity<AlertResponse> acknowledge(
-            @PathVariable Long id) {
-        return ResponseEntity.ok(service.acknowledgeAlert(id));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<AlertResponse> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getAlertById(id));
+    public ResponseEntity<AlertRecord> triggerAlert(@RequestBody AlertRecord alert) {
+        AlertRecord triggered = alertService.triggerAlert(alert);
+        return ResponseEntity.ok(triggered);
     }
 
     @GetMapping("/shipment/{shipmentId}")
-    public ResponseEntity<List<AlertResponse>> getByShipment(
-            @PathVariable Long shipmentId) {
-        return ResponseEntity.ok(service.getAlertsByShipment(shipmentId));
+    public ResponseEntity<List<AlertRecord>> getAlertsByShipment(@PathVariable Long shipmentId) {
+        List<AlertRecord> alerts = alertService.getAlertsByShipment(shipmentId);
+        return ResponseEntity.ok(alerts);
     }
 }

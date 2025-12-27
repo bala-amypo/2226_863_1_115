@@ -1,46 +1,40 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.TemperatureRuleRequest;
-import com.example.demo.dto.TemperatureRuleResponse;
+import com.example.demo.entity.TemperatureRule;
 import com.example.demo.service.TemperatureRuleService;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rules")
-@Tag(name = "Temperature Rules")
+@RequestMapping("/rules")
 public class TemperatureRuleController {
 
-    private final TemperatureRuleService service;
+    private final TemperatureRuleService temperatureRuleService;
 
-    public TemperatureRuleController(TemperatureRuleService service) {
-        this.service = service;
+    public TemperatureRuleController(TemperatureRuleService temperatureRuleService) {
+        this.temperatureRuleService = temperatureRuleService;
     }
 
     @PostMapping
-    public ResponseEntity<TemperatureRuleResponse> createRule(
-            @RequestBody TemperatureRuleRequest request) {
-        return ResponseEntity.ok(service.createRule(request));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<TemperatureRuleResponse> updateRule(
-            @PathVariable Long id,
-            @RequestBody TemperatureRuleRequest request) {
-        return ResponseEntity.ok(service.updateRule(id, request));
+    public ResponseEntity<TemperatureRule> createRule(@RequestBody TemperatureRule rule) {
+        return ResponseEntity.ok(temperatureRuleService.createRule(rule));
     }
 
     @GetMapping("/active")
-    public ResponseEntity<List<TemperatureRuleResponse>> getActiveRules() {
-        return ResponseEntity.ok(service.getActiveRules());
+    public ResponseEntity<List<TemperatureRule>> getActiveRules() {
+        return ResponseEntity.ok(temperatureRuleService.getActiveRules());
     }
 
     @GetMapping("/product/{productType}")
-    public ResponseEntity<TemperatureRuleResponse> getByProductType(
-            @PathVariable String productType) {
-        return ResponseEntity.ok(service.getRuleByProductType(productType));
+    public ResponseEntity<TemperatureRule> getRuleForProduct(
+            @PathVariable String productType,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return temperatureRuleService.getRuleForProduct(productType, date)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

@@ -1,40 +1,29 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.TemperatureLogRequest;
-import com.example.demo.dto.TemperatureLogResponse;
+import com.example.demo.entity.TemperatureSensorLog;
 import com.example.demo.service.TemperatureLogService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/logs")
-@Tag(name = "Temperature Logs")
+@RequestMapping("/logs")
 public class TemperatureLogController {
 
-    private final TemperatureLogService service;
+    private final TemperatureLogService temperatureLogService;
 
-    public TemperatureLogController(TemperatureLogService service) {
-        this.service = service;
+    public TemperatureLogController(TemperatureLogService temperatureLogService) {
+        this.temperatureLogService = temperatureLogService;
     }
 
     @PostMapping
-    public ResponseEntity<TemperatureLogResponse> recordLog(
-            @RequestBody TemperatureLogRequest request) {
-        return ResponseEntity.ok(service.recordLog(request));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<TemperatureLogResponse> getById(
-            @PathVariable Long id) {
-        return ResponseEntity.ok(service.getLogById(id));
+    public ResponseEntity<TemperatureSensorLog> recordLog(@RequestBody TemperatureSensorLog log) {
+        return ResponseEntity.ok(temperatureLogService.recordLog(log));
     }
 
     @GetMapping("/shipment/{shipmentId}")
-    public ResponseEntity<List<TemperatureLogResponse>> getByShipment(
-            @PathVariable Long shipmentId) {
-        return ResponseEntity.ok(service.getLogsByShipment(shipmentId));
+    public ResponseEntity<List<TemperatureSensorLog>> getLogsByShipment(@PathVariable Long shipmentId) {
+        return ResponseEntity.ok(temperatureLogService.getLogsByShipment(shipmentId));
     }
 }
