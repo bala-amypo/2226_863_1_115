@@ -12,8 +12,7 @@ public class JwtUtil {
 
     // Must be at least 256 bits (32+ chars) for HS256
     private static final String SECRET_KEY =
-            "nR7Vb8KpQ4sZcE2M1H9YFJxW6D5A0mLq
-";
+            "nR7Vb8KpQ4sZcE2M1H9YFJxW6D5A0mLq";
 
     private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
 
